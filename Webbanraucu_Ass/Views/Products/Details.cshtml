@@ -1,0 +1,375 @@
+﻿@using Webbanraucu_Ass.Extention
+@model Webbanraucu_Ass.Models.Products
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Products> _lsProduc = ViewBag.LSsp;
+}
+<!-- Begin Main Content Area  -->
+<main class="main-content">
+    <div class="breadcrumb-area">
+        <div class="container pt-4">
+            <div class="row pb-4">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h1 class="breadcrumb-heading">@Model.ProductName</h1>
+                        <ul>
+                            <li>
+                                <a href="index.html">Home <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>@Model.ProductName</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="single-product-area section-space-top-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-product-img h-100">
+                        <div class="swiper-container single-product-slider">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="/" class="single-img gallery-popup">
+                                        <img class="img-full" src="~/images/products/@Model.Hinhanh" alt="Product Image">
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-thumb-with-content row">
+                        <div class="col-12 order-lg-1 order-2 pt-10 pt-lg-0">
+                            <div class="single-product-content">
+                                <h2 class="title">@Model.ProductName</h2>
+                                <div class="price-box pb-1">
+                                    <span class="new-price text-danger">@Model.Price.ToVnd()</span>
+                                </div>
+                                <div class="rating-box-wrap pb-7">
+                                    <div class="rating-box">
+                                        <ul>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="short-desc mb-6">
+                                   Tồn kho :  <b>@Model.Amount</b>
+                                </p>
+                                <ul class="quantity-with-btn pb-7">
+                                    <li class="quantity">
+                                        <div class="cart-plus-minus">
+                                            <input class="cart-plus-minus-box" id="txtsoluong" name="txtsoluong" value="1" type="text">
+                                        </div>
+                                    </li>
+                                    <li class="add-to-cart">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <a class="btn btn-custom-size lg-size btn-secondary-hover rounded-0"  style="background: #ff6347" href="javascript:void(0)">Thêm vào giỏ hàng</a>
+                                            <input hidden asp-for="ProductID" />
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-custom-size lg-size btn-secondary-hover rounded-0" style="background: #ff6347" href="dang-nhap.html">Thêm vào giỏ hàng</a>
+                                            <input hidden asp-for="ProductID" />
+                                        }
+                                    </li>
+                                </ul>
+                                <div class="product-category text-matterhorn pb-2">
+                                    <span class="title">Danh mục :</span>
+                                    <ul>
+                                        <li>
+                                            <a href="/@Model.Categories.CatName">@Model.Categories.CatName</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="social-link align-items-center pb-lg-8">
+                                    <span class="title pe-3">Share:</span>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-pinterest-p"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-tumblr"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-dribbble"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 order-lg-2 order-1 pt-10 pt-lg-0">
+                            <div class="swiper-container single-product-thumbs">
+                                <div class="swiper-wrapper">
+                                    <a href="javascript:void(0)" class="swiper-slide">
+                                        <img class="img-full" src="~/assets/images/product/large-size/2-1-555x645.jpg" alt="Product Thumnail">
+                                    </a>
+                                    <a href="javascript:void(0)" class="swiper-slide">
+                                        <img class="img-full" src="~/assets/images/product/large-size/2-2-555x645.jpg" alt="Product Thumnail">
+                                    </a>
+                                    <a href="javascript:void(0)" class="swiper-slide">
+                                        <img class="img-full" src="~/assets/images/product/large-size/2-3-555x645.jpg" alt="Product Thumnail">
+                                    </a>
+                                    <a href="javascript:void(0)" class="swiper-slide">
+                                        <img class="img-full" src="~/assets/images/product/large-size/2-4-555x645.jpg" alt="Product Thumnail">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-tab-area section-space-top-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav product-tab-nav product-tab-style-2" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="active btn btn-custom-size btn-secondary-hover" style="background: #ff6347"  id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">
+                                Mô tả
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="btn btn-custom-size btn-secondary-hover" style="background: #ff6347" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">
+                                Đánh giá
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content product-tab-content">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <div class="product-description-body">
+                                @Html.Raw(Model.Description)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div class="product-review-body">
+                                <h4 class="heading mb-5">3 Các đánh giá</h4>
+                                <ul class="user-info-wrap">
+                                    <li>
+                                        <ul class="user-info">
+                                            <li class="user-avatar">
+                                                <img src="~/assets/images/testimonial/user/1.png" alt="User Image">
+                                            </li>
+                                            <li class="user-comment">
+                                                <div class="rating-box">
+                                                    <ul>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="meta">
+                                                    <span><strong>Nhã Phương -</strong> March 15, 2021</span>
+                                                </div>
+                                                <p class="short-desc mb-0">
+                                                    “Bánh mì ăn ngon quá“
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="user-info">
+                                            <li class="user-avatar">
+                                                <img src="~/assets/images/testimonial/user/1.png" alt="User Image">
+                                            </li>
+                                            <li class="user-comment">
+                                                <div class="rating-box">
+                                                    <ul>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="meta">
+                                                    <span><strong>Phong -</strong> March 15, 2021</span>
+                                                </div>
+                                                <p class="short-desc mb-0">
+                                                    “Thịt lợn không được thơm“
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="user-info">
+                                            <li class="user-avatar">
+                                                <img src="~/assets/images/testimonial/user/1.png" alt="User Image">
+                                            </li>
+                                            <li class="user-comment">
+                                                <div class="rating-box">
+                                                    <ul>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                        <li><i class="pe-7s-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="meta">
+                                                    <span><strong>Huy -</strong> March 15, 2021</span>
+                                                </div>
+                                                <p class="short-desc mb-0">
+                                                    “Cá rất chât lượng“
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="feedback-area pt-5">
+                                    <h2 class="heading mb-1">Thêm đánh giá</h2>
+                                    <p class="short-desc mb-3">Email của bạn sẽ ở chế độ không công khai</p>
+                                    <div class="rating-box">
+                                        <span>Đánh giá của bạn</span>
+                                        <ul class="ps-4">
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                            <li><i class="pe-7s-star"></i></li>
+                                        </ul>
+                                    </div>
+                                    <form class="feedback-form pt-8" action="#">
+                                        <div class="group-input">
+                                            <div class="form-field me-md-6 mb-6 mb-md-0">
+                                                <input type="text" name="name" placeholder="Tên*" class="input-field">
+                                            </div>
+                                            <div class="form-field me-md-6 mb-6 mb-md-0">
+                                                <input type="text" name="email" placeholder="Địa chỉ Email*" class="input-field">
+                                            </div>
+                                            <div class="form-field">
+                                                <input type="text" name="number" placeholder="Số điện thoại" class="input-field">
+                                            </div>
+                                        </div>
+                                        <div class="form-field mt-6">
+                                            <textarea name="message" placeholder="Nội dung" class="textarea-field"></textarea>
+                                        </div>
+                                        <div class="button-wrap mt-8">
+                                            <button type="submit" value="submit" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover btn-lg rounded-0" name="submit">Gửi đánh giá</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-slider-area">
+        <div class="container">
+            <div class="section-title text-center">
+                <span class="sub-title" style="color: #ff6347">Có Thể Bạn Sẽ Thích</span>
+                <h2 class="title mb-0">Sản Phẩm Tương Tự</h2>
+            </div>
+            <div class="row pt-3">
+                <div class="row">
+                    @if (Model != null && _lsProduc.Count() > 0)
+                    {
+                        foreach (var iteam in _lsProduc)
+                        {
+                            string url = $"/{iteam.ProductName}-{iteam.ProductID}.html";
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="product-item">
+                                    <div class="product-img img-zoom-effect">
+                                        <a href="@url">
+                                            <img class="img-full" width="300px" height="400px" src="~/images/products/@iteam.Hinhanh" alt="Product Images">
+                                        </a>
+                                        <div class="product-add-action">
+                                            <ul>
+                                                <li>
+                                                    <a href="@url">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@url">
+                                                        <i class="pe-7s-shuffle"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@url">
+                                                        <i class="pe-7s-like"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <a class="product-name" href="@url">@iteam.ProductName</a>
+                                        <div class="price-box pb-1">
+                                            <span class="new-price">@iteam.Price.ToVnd()</span>
+                                        </div>
+                                        <div class="rating-box">
+                                            <ul>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                                <li><i class="pe-7s-star"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".add-to-cart").click(function() {
+                var producid = $('#ProductID').val();
+                var soluong = $('#txtsoluong').val();
+                $.ajax({
+                    url: 'api/cart/add',
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        producID: producid,
+                        sl: soluong
+                    },
+                    success: function(kq) {
+                        if (kq.success) {
+                            alert("Thêm sản phẩm thành công");
+                            window.location.reload();
+                        } else {
+                            alert("Sản phẩm trong kho không đủ");
+                        }
+                    },
+                    error: function(er) {
+                        alert("Lỗi" + er);
+                    }
+                });
+            });
+        });
+    </script>
+}

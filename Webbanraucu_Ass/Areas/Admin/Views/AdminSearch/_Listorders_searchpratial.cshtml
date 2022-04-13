@@ -1,0 +1,27 @@
+﻿@using Webbanraucu_Ass.Extention
+@model List<Orders>
+@if (Model != null)
+{
+    foreach (var iteam in Model)
+    {
+        <tr>
+            <td>@iteam.OrderID</td>
+            <td>@iteam.Customers.FullName</td>
+            <td>@iteam.OrderDat</td>
+            <td>@iteam.TotoMoney.ToVnd()</td>
+            <td>@iteam.TransacStatus.Status</td>
+                                
+            <td>
+                @if (iteam.TransacStatuID != 5)
+                {
+                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminOrders" asp-action="ChangeStatus" asp-route-id="@iteam.OrderID">Cập nhật trạng thái</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary btn-tone m-r-5" >Đã Thanh Toán Rồi</a>
+                }
+                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminOrders" asp-action="Details" asp-route-id="@iteam.OrderID">Chi tiết hóa đơn</a>
+            </td>
+        </tr>
+    }
+}

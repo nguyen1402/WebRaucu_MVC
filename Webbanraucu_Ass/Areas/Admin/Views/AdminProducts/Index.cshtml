@@ -1,0 +1,114 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.PagedList<Webbanraucu_Ass.Models.Products>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh Sách Sản Phẩm " + CurrentPage;
+    Layout = "~/Areas/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh Sách Sản Phẩm : page @CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-5">
+                <div class="d-md-flex">
+                    <input type="text" id="keyw" name="keyw" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                </div>
+            </div>
+            
+            <div class="col-lg-7 text-right">
+                <a class="btn btn-primary" asp-controller="AdminProducts" asp-action="Create"> <i class="anticon anticon-plus-circle m-r-5">Add Product</i> </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Danh Mục</th>
+                    <th>Giá</th>
+                    <th>Tồn Kho</th>
+                    <th>Trạng Thái</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="record-table">
+                @if (Model != null)
+                {
+                    foreach (var iteam in Model)
+                    {
+                        <tr>
+
+                            <td>@iteam.ProductID</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                    <h6 class="m-b-0 m-l-10">@iteam.ProductName</h6>
+                                </div>
+                            </td>
+                            <td>@iteam.Categories.CatName</td>
+                            <td>@iteam.Price.ToString("##,###") VNĐ</td>
+                            <td>@iteam.Amount</td>
+                            <td>
+                                @if (@iteam.Amount > 0)
+                                {
+                                    <span class="badge badge-primary">Còn hàng</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-warning">Hết hàng</span>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@iteam.ProductID">View</a>
+                                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@iteam.ProductID">Edit</a>
+                                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@iteam.ProductID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+            <div>
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#keyw").keyup(function() {
+                var str = $("#keyw").val();
+                $.ajax({
+                    url: "/Admin/AdminSearch/FindProduct",
+                    datatype: "JSON",
+                    type: "POST",
+                    data:
+                    {
+                        keywork: str
+                    },
+                    success: function(kq) {
+                        $("#record-table").html("");
+                        $("#record-table").html(kq);
+                    },
+                    error: function() {
+                        alert("....Loi....");
+                    }
+                });
+            });
+        });
+    </script>
+}

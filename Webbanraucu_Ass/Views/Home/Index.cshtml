@@ -1,0 +1,83 @@
+﻿@using PagedList.Core.Mvc
+@using Webbanraucu_Ass.Extention
+@model PagedList.Core.PagedList<Webbanraucu_Ass.Models.Products>
+
+@{
+    ViewData["Title"] = "Home" + ViewBag.Curren;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Begin Slider Area -->
+
+<!-- Slider Area End Here -->
+<!-- Begin Product Area -->
+<div class="product-area product-style-2 section-space-y-axis-100">
+    <div class="container">
+        <div class="section-title text-center pb-55">
+            <span class="sub-title" style="color: #FF8C00 ">Mới Nhất</span>
+            <h2 class="title mb-0">SẢN PHẨM</h2>
+        </div>
+        <div class="row">
+            @if (Model != null)
+            {
+                foreach (var iteam in Model)
+                {
+                    string url = $"/{iteam.ProductName}-{iteam.ProductID}.html";
+                    <div class="col-xl-3 col-lg-4 col-sm-6 pt-3">
+                        <div class="product-item">
+                            <div class="product-img img-zoom-effect">
+                                <a href="@url">
+                                    <img class="img-full" width="200px" height="300px" src="~/images/products/@iteam.Hinhanh" alt="Product Images">
+                                </a>
+                                <div class="product-add-action">
+                                    <ul>
+                                        <li>
+                                            <a href="@url">
+                                                <i class="pe-7s-cart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@url">
+                                                <i class="pe-7s-shuffle"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@url">
+                                                <i class="pe-7s-like"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <a class="product-name" href="@url">@iteam.ProductName</a>
+                                <div class="price-box pb-1">
+                                    <span class="new-price">@iteam.Price.ToVnd()</span>
+                                </div>
+                                <div class="rating-box">
+                                    <ul>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                        <li><i class="pe-7s-star"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!-- Product Area End Here -->
+<div class="pagination-area pt-10 pb-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <pager class="pager-container" list="@Model" asp-controller="Home" asp-action="Index" />
+            </li>
+        </ul>
+    </nav>
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model Webbanraucu_Ass.Models.Products
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Thêm mới sản phẩm</span>
+        </nav>
+    </div>
+</div>
+<form asp-area="Admin" asp-controller="AdminProducts" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="page-header no-gutters has-tab">
+        
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#product-edit-basic"><b>Nhập Thông Tin Sản Phẩm</b></a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productName">Tên sản phẩm</label>
+                        <input type="text" id="productName" name="productName" class="form-control" asp-for="ProductName" required/>
+                        <span class="text-danger">*Vui lòng không bỏ trống tên sản phẩm</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productName">Mô tả ngắn</label>
+                        <input type="text" class="form-control" asp-for="SortDesc">
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productPrice">Giá bán</label>
+                        <input type="text" class="form-control" asp-for="Price" required />
+                        <span class="text-danger">*Vui lòng không bỏ trống giá bán</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productCategory">Danh mục sản phẩm</label>
+                        <select class="custom-select" style="min-width: 180px;" asp-for="CatID" asp-items="ViewBag.DanhMuc">
+                            <option value="" disabled="" selected="">Danh Mục</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productBrand">Hình Ảnh</label>
+                        <input name="Hinhanh" type="file" class="form-control" asp-for="Hinhanh">
+                        <span asp-validation-for="Hinhanh" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productStatus">Số Lượng</label>
+                        <input type="text" class="form-control" asp-for="Amount" required />
+                        <span class="text-danger">*Vui lòng không bỏ trống số lượng</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productStatus">Mô tả</label>
+                        <input type="text" class="form-control" asp-for="Description">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-b-15">
+        <button class="btn btn-primary" type="submit" ng-disabled="form_user.$invalid">
+            <i class="anticon anticon-save"></i>
+            <span>Lưu</span>
+        </button>
+    </div>
+</form>
+@section Scripts
+{
+    <script src="~/js/angularjs.min.js"></script>
+}
+

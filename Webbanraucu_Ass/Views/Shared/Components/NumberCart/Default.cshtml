@@ -1,0 +1,23 @@
+﻿@model List<Webbanraucu_Ass.ModelsView.GioHang>
+@if (Model != null && Model.Count > 0)
+{
+    <li class="minicart-wrap me-3 me-lg-0" id="numberCart">
+        <a href="#miniCart" class="minicart-btn toolbar-btn">
+            <i class="pe-7s-shopbag"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                @Model.Count
+            </span>
+        </a>
+    </li>
+}
+else
+{
+    <li class="minicart-wrap me-3 me-lg-0" id="numberCart">
+        <a href="#miniCart" class="minicart-btn toolbar-btn">
+            <i class="pe-7s-shopbag"></i>
+            @*<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                0
+            </span>*@
+        </a>
+    </li>
+}

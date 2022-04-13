@@ -1,0 +1,35 @@
+﻿@model List<Products>
+@if (Model != null)
+{
+    foreach (var iteam in Model)
+    {
+        <tr>
+
+            <td>@iteam.ProductID</td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                    <h6 class="m-b-0 m-l-10">@iteam.ProductName</h6>
+                </div>
+            </td>
+            <td>@iteam.Categories.CatName</td>
+            <td>@iteam.Price.ToString("##,###") VNĐ</td>
+            <td>@iteam.Amount</td>
+            <td>
+                @if (@iteam.Amount > 0)
+                {
+                    <span class="badge badge-primary">Còn hàng</span>
+                }
+                else
+                {
+                    <span class="badge badge-warning">Hết hàng</span>
+                }
+            </td>
+            <td>
+                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Details" asp-route-id="@iteam.ProductID">View</a>
+                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Edit" asp-route-id="@iteam.ProductID">Edit</a>
+                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@iteam.ProductID">Delete</a>
+            </td>
+        </tr>
+    }
+}

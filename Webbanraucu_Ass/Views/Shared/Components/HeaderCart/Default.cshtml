@@ -1,0 +1,53 @@
+﻿@using Webbanraucu_Ass.Extention
+@model List<Webbanraucu_Ass.ModelsView.GioHang>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="offcanvas-minicart_wrapper" id="miniCart">
+        <div class="harmic-offcanvas-body">
+            <div class="minicart-content">
+                <div class="minicart-heading">
+                    <h4 class="mb-0">Giỏ hàng</h4>
+                    <a href="#" class="button-close"><i class="pe-7s-close"></i></a>
+                </div>
+                <ul class="minicart-list">
+                    @foreach (var iteam in Model)
+                    {
+                        string url = $"/{iteam._products.ProductName}-{iteam._products.ProductID}.html";
+                        <li class="minicart-product">
+                            <a class="product-item_remove" href="#">
+                                <i class="pe-7s-close"></i>
+                            </a>
+                            <a href="@url" class="product-item_img">
+                                <img class="img-full" src="~/images/products/@iteam._products.Hinhanh" alt="Product Image">
+                            </a>
+                            <div class="product-item_content">
+                                <a class="product-item_title" href="@url">@iteam._products.ProductName</a>
+                                <span class="product-item_quantity">@iteam.soluong x @iteam._products.Price.ToVnd()</span>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="minicart-item_total">
+                <span>Tổng tiền</span>
+                <span class="ammount">@Model.Sum(c => c.Tongtien).ToVnd()</span>
+            </div>
+            <div class="group-btn_wrap d-grid gap-2">
+                <a href="cart.html" class="btn btn-danger btn-danger-hover">Xem giỏ hàng</a>
+                <a href="checkout.html" class="btn btn-danger btn-danger-hover">Thanh toán</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="offcanvas-minicart_wrapper" id="miniCart">
+        <div class="harmic-offcanvas-body">
+            <div class="minicart-content">
+                <div class="minicart-heading">
+                    <h4 class="mb-0">Giỏ hàng Rỗng</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+}

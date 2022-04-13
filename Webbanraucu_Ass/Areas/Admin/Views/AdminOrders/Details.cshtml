@@ -1,0 +1,128 @@
+﻿@using Webbanraucu_Ass.Extention
+@model Webbanraucu_Ass.Models.Orders
+
+@{
+    ViewData["Title"] = "Thông tin đơn hàng #" + Model.OrderID;
+    Layout = "~/Areas/Admin/Shared/_AdminLayout.cshtml";
+    List<OrderDetails> _lsDetailsList = ViewBag.ChiTiet;
+}
+
+<!-- Page Container START -->
+<div class="page-container">
+
+
+    <!-- Content Wrapper START -->
+    <div class="main-content">
+        <div class="page-header">
+            <div class="header-sub-title">
+                <nav class="breadcrumb breadcrumb-dash">
+                    <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+                        <span class="breadcrumb-item active">Chi Tiết Hóa Đơn</span>
+                </nav>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div id="invoice" class="p-h-30">
+                        <div class="m-t-15 lh-2">
+                            <div class="inline-block">
+                                <img class="img-fluid" src="assets/images/logo/logo.png" alt="">
+                                <address class="p-l-10">
+                                    <span class="font-weight-semibold text-dark">BTNShop, DC.</span><br>
+                                    <span>Lục Nam -</span><br>
+                                    <span>Bắc Giang</span><br>
+                                    <abbr class="text-dark" title="Phone">Số điện thoại:</abbr>
+                                    <span>(+84) 0845512xxx </span>
+                                </address>
+                            </div>
+                            <div class="float-right">
+                                <h2>HÓA ĐƠN</h2>
+                            </div>
+                        </div>
+                        <div class="row m-t-20 lh-2">
+                            <div class="col-sm-9">
+                                <h3 class="p-l-10 m-t-10">Khách Hàng:</h3>
+                                <address class="p-l-10 m-t-10">
+                                    <span class="font-weight-semibold text-dark">Địa Chỉ.</span><br>
+                                    <span>@Model.Customers.FullName </span><br>
+                                    <span>@Model.Customers.Address</span>
+                                </address>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="m-t-80">
+                                    <div class="text-dark text-uppercase d-inline-block">
+                                        <span class="font-weight-semibold text-dark">Mã Hóa Đơn :</span>
+                                    </div>
+                                    <div class="float-right">#@Model.OrderID</div>
+                                </div>
+                                <div class="text-dark text-uppercase d-inline-block">
+                                    <span class="font-weight-semibold text-dark">Ngày tạo : </span>
+                                </div>
+                                <div class="float-right">@Model.OrderDat</div>
+                            </div>
+                        </div>
+                        <div class="m-t-20">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Đơn Giá</th>
+                                            <th>Thành Tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if (_lsDetailsList != null)
+                                    {
+                                        int i = 1;
+                                        foreach (var iteam in _lsDetailsList)
+                                        {
+                                            <tr>
+                                                <th>@i</th>
+                                                <td><a>@iteam.Products.ProductName</a></td>
+                                                <td>@iteam.Quantity</td>
+                                                <td>@iteam.Products.Price.ToVnd()</td>
+                                                <td>@iteam.TotalMoney.ToVnd()</td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row m-t-30 lh-1-8">
+                                <div class="col-sm-12">
+                                    <div class="float-right text-right">
+                                        <p>Giảm giá  :  0đ </p>
+                                        <hr>
+                                        <h3><span class="font-weight-semibold text-dark">Tổng tiền :</span> @Model.TotoMoney.ToVnd()</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-t-30 lh-2">
+                                <div class="col-sm-12">
+                                    <div class="border-bottom p-v-20">
+                                        <p class="text-opacity" style="text-align: center"><small><b>Chúc Quý Khách Một Ngày Tốt Lành</b></small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-v-20">
+                                <div class="col-sm-6">
+                                    <img class="img-fluid text-opacity m-t-5" width="100" src="assets/images/logo/logo.png" alt="">
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <small><span class="font-weight-semibold text-dark">Số điện thoại hỗ trợ:</span> 0865514xxx</small>
+                                    <br>
+                                    <small>btnshop@fpt.edu.vn</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

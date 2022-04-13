@@ -1,0 +1,42 @@
+﻿@using Webbanraucu_Ass.Extention
+@model List<Webbanraucu_Ass.Models.Orders>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Ngày mua hàng</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng tiền</th>
+                    <th></th>
+                </tr>
+                @foreach (var iteam in Model)
+                {
+                    <tr>
+                        <td><a class="account-order-id" href="javascript:void(0)">@iteam.OrderID</a></td>
+                        <td>@iteam.OrderDat</td>
+                        <td>@iteam.TransacStatus.Status</td>
+                        <td>@iteam.TotoMoney.ToVnd()</td>
+                        <td>
+                            <a data-madh="@iteam.OrderID"  class="Xemdonhang btn btn-danger btn-danger-hover"><span>Xem đơn hàng</span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="recos-table">
+
+        </div>
+    </div>
+}
+else
+{
+    <p>Chưa có đơn hàng</p>
+}

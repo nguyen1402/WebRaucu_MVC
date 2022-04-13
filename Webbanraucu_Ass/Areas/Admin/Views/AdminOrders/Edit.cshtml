@@ -1,0 +1,47 @@
+﻿@model Webbanraucu_Ass.Models.Orders
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Orders</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderID" />
+            <div class="form-group">
+                <label asp-for="CustomerID" class="control-label"></label>
+                <select asp-for="CustomerID" class="form-control" asp-items="ViewBag.CustomerID"></select>
+                <span asp-validation-for="CustomerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDat" class="control-label"></label>
+                <input asp-for="OrderDat" class="form-control" />
+                <span asp-validation-for="OrderDat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransacStatuID" class="control-label"></label>
+                <select asp-for="TransacStatuID" class="form-control" asp-items="ViewBag.TransacStatuID"></select>
+                <span asp-validation-for="TransacStatuID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotoMoney" class="control-label"></label>
+                <input asp-for="TotoMoney" class="form-control" />
+                <span asp-validation-for="TotoMoney" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,105 @@
+﻿@using Webbanraucu_Ass.ModelsView
+@model Webbanraucu_Ass.Models.Customers
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Orders> danhsachdonhang = ViewBag.Danhsachdonhang;
+    ChangedPasswordVM changedPassword = new ChangedPasswordVM();
+}
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="breadcrumb-area">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <ul>
+                            <li>
+                                <a href="/">Home <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>Tài khoản của tôi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="account-page-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="nav myaccount-tab" id="account-page-tab" role="tablist" >
+                        <li class="nav-item" style="width: 200px">
+                            <a class="nav-link active btn-danger btn-danger-hover " style="color: white" id="account-dashboard-tab" data-bs-toggle="tab" href="#account-dashboard" role="tab" aria-controls="account-dashboard" aria-selected="true">Cá Nhân</a>
+                        </li>
+                        <li class="nav-item" style="width: 200px">
+                            <a class="nav-link  btn-danger btn-danger-hover" style="color: white"  id="account-orders-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders" aria-selected="false">Danh sách đơn hàng</a>
+                        </li>
+                        <li class="nav-item" style="width: 200px">
+                            <a class="nav-link  btn-danger btn-danger-hover" style="color: white"  id="account-details-tab" data-bs-toggle="tab" href="#account-details" role="tab" aria-controls="account-details" aria-selected="false">Thay đổi mật khẩu</a>
+                        </li>
+                        <li class="nav-item" style="width: 200px">
+                            <a class="nav-link  btn-danger btn-danger-hover" style="color: white"  id="account-logout-tab" href="/dang-xuat.html" role="tab" aria-selected="false">Đăng Xuất</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
+                        <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel" aria-labelledby="account-dashboard-tab">
+                            <div class="myaccount-dashboard">
+                                <p>
+                                    Xin chào - <b>@Model.FullName</b>
+                                </p>
+                                <p>
+                                    Gmail - <b>@Model.Email</b>
+                                </p>
+                                <p>
+                                    Phone - <b>@Model.Phone</b>
+                                </p>
+                                <p>
+                                    Address - <b>@Model.Address</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
+                            <div class="myaccount-orders">
+                                <h4 class="small-title">Danh Sách Đơn Hàng</h4>
+                                @await Html.PartialAsync("_DonHangPartialView", danhsachdonhang)
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-address-tab">
+                            @await Html.PartialAsync("_DoimkParitialView", changedPassword)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts
+{
+    <script>
+        $(document).ready(function() {
+            $(".Xemdonhang").click(function() {
+                var madh = $(this).attr("data-madh");
+                $.ajax({
+                    url: "/DonHang/Details",
+                    datatype: "json",
+                    type: "post",
+                    data:
+                    {
+                        id: madh
+                    },
+                    success: function(result) {
+                        $("#recos-table").html(result);
+                    },
+                    error: function() {
+                        alert("Lỗi");
+                    }
+                });
+            });
+        });
+    </script>
+}
+

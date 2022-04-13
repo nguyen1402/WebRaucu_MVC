@@ -1,0 +1,67 @@
+﻿@using Webbanraucu_Ass.Extention
+@model Webbanraucu_Ass.Models.Orders
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Cập Nhật Trạng Thái Đơn Hàng</span>
+        </nav>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"> THÔNG TIN ĐƠN HÀNG #@Model.OrderID</h4>
+            <div class="table-responisve">
+                <table class="product-info-table m-t-20">
+                    <tbody>
+                        <tr>
+                            <td>ID:</td>
+                            <td class="text-dark font-weight-semibold">#@Model.OrderID</td>
+                        </tr>
+                        <tr>
+                            <td>Ngày mua hàng :</td>
+                            <td>@Model.OrderDat</td>
+                        </tr>
+                        <tr>
+                            <td>Khách hàng :</td>
+                            <td>@Model.Customers.FullName</td>
+                        </tr>
+                        <tr>
+                            <td>Số điện thoại :</td>
+                            <td>@Model.Customers.Phone</td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ :</td>
+                            <td>@Model.Customers.Address</td>
+                        </tr>
+                        <tr>
+                            <td>Tổng tiền :</td>
+                            <td>@Model.TotoMoney.ToVnd()</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="AdminOrders" asp-action="ChangeStatus" asp-route-id="@Model.OrderID" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderID" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label> Trạng thái đơn hàng</label>
+                        <select class="form-group" asp-for="TransacStatuID" asp-items="@ViewBag.Trangthai">
+                            <option value="0" disabled="" selected="">Chọn trạng thái đơn hàng</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success"> Lưu thay đổi</button>
+        </form>
+    </div>
+</div>
